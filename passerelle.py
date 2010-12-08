@@ -37,9 +37,9 @@ class Device:
     def display(self):
         if len(self.objects)==0 and self.empty:
             self.empty=0
+        i=0
             #self.device.emit(uinput.EV_KEY, uinput.BTN_TOUCH, 0)
             #print ("type :%d code : %d value : %d" % (uinput.EV_KEY, uinput.BTN_TOUCH, 0))
-        i=1
         for key in self.objects:
             obj=self.objects[key]
             self.device.emit(uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid, syn=False)
@@ -50,6 +50,7 @@ class Device:
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_POSITION_Y, obj.ypos*1000))
             self.device.emit(0, 2, 0, syn=False)
             print("type :%d code : %d value : %d"%(0,2,0))
+            i+=1
             self.x.append(obj.xpos*1000)
             self.y.append(obj.ypos*1000)
             if (max(self.x)-min(self.x)<10)&(max(self.y)-min(self.y)<10):
@@ -92,7 +93,6 @@ class Device:
                 self.device.emit(0,0,0,syn=False)
                 print ("type :0 code :0 value :0")
                 self.empty=1
-            i+=1
 
 if __name__ == "__main__":
     tracking=tuio.Tracking()
