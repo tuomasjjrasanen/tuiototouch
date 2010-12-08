@@ -32,12 +32,16 @@ class Device:
             self.objects[obj.sessionid]=obj
 
     def display(self):
-        if len(self.objects)==0 and self.empty:
+        if (len(self.objects)==0) & self.empty:
+            print ("type :%d code : %d value : %d" % (uinput.EV_KEY, uinput.BTN_TOUCH, 0))
+            self.device.emit(uinput.EV_KEY, uinput.BTN_TOUCH, 0)
             self.empty=0
         i=0
-            #self.device.emit(uinput.EV_KEY, uinput.BTN_TOUCH, 0)
-            #print ("type :%d code : %d value : %d" % (uinput.EV_KEY, uinput.BTN_TOUCH, 0))
         for key in self.objects:
+            if not self.empty:
+                print ("type :%d code : %d value : %d" % (uinput.EV_KEY, uinput.BTN_TOUCH, 1))
+                self.device.emit(uinput.EV_KEY, uinput.BTN_TOUCH, 1)
+            self.empty=1
             obj=self.objects[key]
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid))
             self.device.emit(uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid, syn=False)
