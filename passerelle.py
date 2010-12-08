@@ -42,12 +42,12 @@ class Device:
             #print ("type :%d code : %d value : %d" % (uinput.EV_KEY, uinput.BTN_TOUCH, 0))
         for key in self.objects:
             obj=self.objects[key]
-            self.device.emit(uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid, syn=False)
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid))
-            self.device.emit(uinput.EV_ABS, uinput.ABS_MT_POSITION_X, obj.xpos*1000, syn=False)
+            self.device.emit(uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid, syn=False)
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_POSITION_X, obj.xpos*1000))
-            self.device.emit(uinput.EV_ABS, uinput.ABS_MT_POSITION_Y, obj.ypos*1000, syn=False)
+            self.device.emit(uinput.EV_ABS, uinput.ABS_MT_POSITION_X, obj.xpos*1000, syn=False)
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_POSITION_Y, obj.ypos*1000))
+            self.device.emit(uinput.EV_ABS, uinput.ABS_MT_POSITION_Y, obj.ypos*1000, syn=False)
             self.device.emit(0, 2, 0, syn=False)
             print("type :%d code : %d value : %d"%(0,2,0))
             i+=1
