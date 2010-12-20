@@ -12,15 +12,15 @@ class Device(object):
     def __init__(self):
         self.objects=dict()
         self.empty=1
-        capabilities= {
+        self.capabilities= {
         uinput.EV_KEY: [uinput.BTN_TOUCH],
         uinput.EV_ABS: [uinput.ABS_MT_POSITION_X, uinput.ABS_MT_POSITION_Y,uinput.ABS_MT_TRACKING_ID],
         }
-        abs_parameters = {uinput.ABS_MT_POSITION_X:(0, 1000, 0, 0), uinput.ABS_MT_POSITION_Y:(0, 1000, 0, 0),
+        self.abs_parameters = {uinput.ABS_MT_POSITION_X:(0, 1000, 0, 0), uinput.ABS_MT_POSITION_Y:(0, 1000, 0, 0),
         uinput.ABS_MT_TRACKING_ID:(0, 10, 0, 0)}
         self.device=uinput.Device(name="TUIO-multitouch")
-        self.device.capabilities=capabilities
-        self.device.abs_parameters=abs_parameters
+        self.device.capabilities=self.capabilities
+        self.device.abs_parameters=self.abs_parameters
         self.x_mouse=0
         self.y_mouse=0
 
