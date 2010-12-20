@@ -13,7 +13,7 @@ Installation
 ============
 
 In order to use this application, you will need some library used by it.
-The two main library of this project are pytuio:
+The two main libraries of this project are pytuio:
 
 	http://pytuio.googlecode.com/files/pytuio-0.1.tar.gz
 
