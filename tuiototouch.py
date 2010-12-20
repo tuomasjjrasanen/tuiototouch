@@ -7,7 +7,7 @@ import tuio
 import uinput
 import time
 
-class Device:
+class Device(object):
 
     def __init__(self):
         self.objects=dict()
@@ -23,7 +23,6 @@ class Device:
         self.device.abs_parameters=abs_parameters
         self.x_mouse=0
         self.y_mouse=0
-        self.cpt=0
 
     def update(self,list_obj,list_cursors):
         list=set(list_obj).union(set(list_cursors))
@@ -42,7 +41,14 @@ class Device:
                 print ("type :%d code : %d value : %d" % (uinput.EV_KEY, uinput.BTN_TOUCH, 1))
                 self.device.emit(uinput.EV_KEY, uinput.BTN_TOUCH, 1)
             self.empty=1
-            obj=self.objects[key]
+            self.treatment(self.objects[key])
+            i+=1
+            if i==len(self.objects):
+                self.device.emit(0,0,0,syn=False)
+                print ("type :0 code :0 value :0")
+                self.empty=1
+
+    def treatment(self, obj):
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid))
             self.device.emit(uinput.EV_ABS, uinput.ABS_MT_TRACKING_ID, obj.sessionid, syn=False)
             print ("type :%d code : %d value : %d" % (uinput.EV_ABS, uinput.ABS_MT_POSITION_X, obj.xpos*1000))
@@ -51,11 +57,6 @@ class Device:
             self.device.emit(uinput.EV_ABS, uinput.ABS_MT_POSITION_Y, obj.ypos*1000, syn=False)
             self.device.emit(0, 2, 0, syn=False)
             print("type :%d code : %d value : %d"%(0,2,0))
-            i+=1
-            if i==len(self.objects):
-                self.device.emit(0,0,0,syn=False)
-                print ("type :0 code :0 value :0")
-                self.empty=1
 
 if __name__ == "__main__":
     tracking=tuio.Tracking()
