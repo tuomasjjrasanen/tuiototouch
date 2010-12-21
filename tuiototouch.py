@@ -21,8 +21,6 @@ class Device(object):
         self.device=uinput.Device(name="TUIO-multitouch")
         self.device.capabilities=self.capabilities
         self.device.abs_parameters=self.abs_parameters
-        self.x_mouse=0
-        self.y_mouse=0
 
     def update(self,list_obj,list_cursors):
         list=set(list_obj).union(set(list_cursors))
@@ -70,6 +68,8 @@ class DeviceWME(Device):
         self.abs_parameters[uinput.ABS_Y] = (0,1000,0,0)
         self.device.capabilities=self.capabilities
         self.device.abs_parameters=self.abs_parameters
+        self.x_mouse=0
+        self.y_mouse=0
 
     def display(self):
         if (len(self.objects)==0) & self.empty:
