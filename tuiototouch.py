@@ -1,7 +1,21 @@
 #! /usr/bin/python
-
-__author__="Charvet Simon"
-__date__ ="$2 nov. 2010 10:09:35$"
+#
+#	tuiototouch, a bridge between TUIO and Linux input for multitouch
+#
+#	The copyright owners for the contents of this file are:
+#		Ecole Nationale de l'Aviation Civile, France (2010-2011)
+#
+#	main and only file
+#
+#	Contributors:
+#		Simon Charvet <charvet@lii-enac.fr>
+#
+#
+#	This program is provided to you as free software;
+#	you can redistribute it	and/or modify it under the terms of the
+#	GNU General Public License as published by the Free Software
+#	Foundation; either version 2 of the License, or (at your option)
+#	any later version.
 
 import tuio
 import uinput
